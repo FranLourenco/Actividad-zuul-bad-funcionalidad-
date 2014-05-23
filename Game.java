@@ -63,22 +63,23 @@ public class Game
         central.setExit("saltaElRio", west);
 
         //objetos en las salas
-        central.addItem(new Item("roca", 12.4,true, false));
-        central.addItem(new Item("ordenador", 6.2,true, false));
-        central.addItem(new Item("ventana", 8.9,false, false));
-        central.addItem(new Item("galleta", 1.2, true, true));
-        central.addItem(new Item("carne", 6.3, true, true));
+        central.addItem(new Item("roca", 12.4,true, false, 0));
+        central.addItem(new Item("ordenador", 6.2,true, false, 0));
+        central.addItem(new Item("ventana", 8.9,false, false, 0));
+        central.addItem(new Item("galleta", 1.2, true, true, 2));
+        central.addItem(new Item("carne", 6.3, true, true, 5));
         
-        south.addItem(new Item("mochila", 3.2,true, false));
-        south.addItem(new Item("pez", 4.5, true, true));
+        south.addItem(new Item("mochila", 3.2,true, false, 0));
+        south.addItem(new Item("pez", 4.5, true, true, 3));
+        south.addItem(new Item("whiskyCola", 3, true, true, -10));
 
-        west.addItem(new Item("tronco", 14,false, false));
-        west.addItem(new Item("extintor", 9,true, false));
-        west.addItem(new Item("seta", 0.50, true, true));
+        west.addItem(new Item("tronco", 14,false, false, 0));
+        west.addItem(new Item("extintor", 9,true, false, 0));
+        west.addItem(new Item("seta", 0.50, true, true, 1));
         
-        east.addItem(new Item("botella", 2,true, false));
-        east.addItem(new Item("armario", 36.2,false, false));     
-        east.addItem(new Item("chorizoDeVillares", 20, true, true));
+        east.addItem(new Item("botella", 2,true, false, 0));
+        east.addItem(new Item("armario", 36.2,false, false, 0));     
+        east.addItem(new Item("chorizoDeVillares", 20, true, true, 20));
         
 
         player.setCurrentRoom(central);

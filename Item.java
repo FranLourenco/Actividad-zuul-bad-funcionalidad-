@@ -12,14 +12,15 @@ public class Item
     private static int idSiguiente = 1; 
     private boolean canBeTaken;
     private boolean edible;
-
+    private float increaseCapacity;
+    
     /**
      * Constructor for objects of class Item
      * 
      * @param description The item's description
      * @param weight The item's weight
      */
-    public Item(String description, double weight, boolean canBeTaken, boolean edible)
+    public Item(String description, double weight, boolean canBeTaken, boolean edible, float increaseCapacity)
     {
         this.id = "" + idSiguiente;
         this.idSiguiente++;
@@ -28,6 +29,7 @@ public class Item
         this.weight = weight;
         this.canBeTaken = canBeTaken;
         this.edible = edible;
+        this.increaseCapacity = increaseCapacity;
     }
 
     /**
@@ -40,6 +42,7 @@ public class Item
         return "ID " + id + ": " + description + " (" + weight + " kg.); " + isEdible();
     }
 
+    
     private String isEdible(){
         String isEdibleObject = null;
 
