@@ -63,17 +63,23 @@ public class Game
         central.setExit("saltaElRio", west);
 
         //objetos en las salas
-        central.addItem(new Item("roca", 12.4,true));
-        central.addItem(new Item("ordenador", 6.2,true));
-        central.addItem(new Item("ventana", 8.9,false));
+        central.addItem(new Item("roca", 12.4,true, false));
+        central.addItem(new Item("ordenador", 6.2,true, false));
+        central.addItem(new Item("ventana", 8.9,false, false));
+        central.addItem(new Item("galleta", 1.2, true, true));
+        central.addItem(new Item("carne", 6.3, true, true));
+        
+        south.addItem(new Item("mochila", 3.2,true, false));
+        south.addItem(new Item("pez", 4.5, true, true));
 
-        south.addItem(new Item("mochila", 3.2,true));
-
-        west.addItem(new Item("tronco", 14,false));
-        west.addItem(new Item("extintor", 9,true));
-
-        east.addItem(new Item("botella", 2,true));
-        east.addItem(new Item("armario", 36.2,false));       
+        west.addItem(new Item("tronco", 14,false, false));
+        west.addItem(new Item("extintor", 9,true, false));
+        west.addItem(new Item("seta", 0.50, true, true));
+        
+        east.addItem(new Item("botella", 2,true, false));
+        east.addItem(new Item("armario", 36.2,false, false));     
+        east.addItem(new Item("chorizoDeVillares", 20, true, true));
+        
 
         player.setCurrentRoom(central);
     }
@@ -104,7 +110,7 @@ public class Game
         System.out.println();
         System.out.println("Welcome to the World of Zuul!");
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type 'help' if you need help.");
+        System.out.println("Type 'ayuda' if you need help.");
         System.out.println();
         player.printLocationInfo();
     }

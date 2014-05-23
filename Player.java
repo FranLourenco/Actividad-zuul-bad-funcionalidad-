@@ -6,7 +6,6 @@ import java.util.Stack;
   */
  public class Player
  {
-    
     private Room currentRoom;
     private Stack<Room> visitedRooms;
     private ArrayList<Item> mochila;

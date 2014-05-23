@@ -13,23 +13,13 @@ import java.util.HashMap;
 public class CommandWords
 {
     // a constant array that holds all valid command words
-    private HashMap<String,Option> commands;
-
+    private Option[] commands;
     /**
      * Constructor - initialise the command words.
      */
     public CommandWords()
     {
-        commands = new HashMap<>();
-        commands.put("go",Option.GO);
-        commands.put("quit",Option.QUIT);
-        commands.put("help",Option.HELP);
-        commands.put("look",Option.LOOK);
-        commands.put("eat",Option.EAT);
-        commands.put("back",Option.BACK);
-        commands.put("items",Option.ITEMS);
-        commands.put("take",Option.TAKE);
-        commands.put("drop",Option.DROP);
+        commands = Option.values();	
     }
 
     /**
@@ -39,7 +29,20 @@ public class CommandWords
      */
     public boolean isCommand(String aString)
     {
-        return commands.containsKey(aString);
+        boolean command = false;
+        int index= 0; 
+        while (index<commands.length && !command){
+            Option key = commands[index];
+            if (key != Option.UNKNOWN){
+                if (key.getOptionString().equals(aString)){
+                    command= true;
+                }
+
+            }
+            index++;
+        }
+
+        return command;
     }
 
     /**
@@ -47,8 +50,10 @@ public class CommandWords
      */    
     public void showAll()
     {
-        for(String key : commands.keySet()){
-            System.out.print(key + ", ");
+        for(Option option: commands){
+            if (option != Option.UNKNOWN){
+                System.out.print(option.getOptionString()+ " ");
+            }
         }
 
     }
@@ -60,14 +65,19 @@ public class CommandWords
      *         if it is not a valid command word.
      */
     public Option getCommandWord(String commandWord){
-        Option command = Option.UNKNOWN;
-        
-        if(isCommand(commandWord)){
-            command = commands.get(commandWord);
-        }
-        
-        return command;
-    }
+        Option comando= Option.UNKNOWN;
+        boolean encontrado = false;
+        int index=0;
+        while(index<commands.length && !encontrado) {
+            Option key = commands[index];
+            if (key != Option.UNKNOWN){
+                if (key.getOptionString().equals(commandWord)){
+                    encontrado = true;
+                    comando = key;
+                }
+            }
+            index++;
+        }	  
+        return comando;
+    }    
 }
-
-

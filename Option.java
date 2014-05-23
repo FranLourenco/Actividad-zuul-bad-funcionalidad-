@@ -7,5 +7,19 @@
  */
 public enum Option
 {
-    GO, QUIT, HELP, LOOK, EAT, BACK, ITEMS, TAKE, DROP, UNKNOWN
+    GO("ir"), QUIT("salir"), HELP("ayuda"), LOOK("mirar"), EAT("comer"), BACK("volver"), ITEMS("objetos"), TAKE("coger"), DROP("soltar"), UNKNOWN("");
+    
+    private String optionString;
+
+    Option(String optionString){
+        this.optionString = optionString;
+    }
+    
+    /*
+     * 
+     * @return
+     */
+    public String getOptionString(){
+        return optionString;
+    }
 }
