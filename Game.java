@@ -141,7 +141,7 @@ public class Game
             player.look();
         }
         else if(commandWord == Option.EAT) {
-            player.eat();
+            player.eat(command);
         }
         else if(commandWord == Option.BACK) {
             player.back();

@@ -13,7 +13,7 @@ public class Item
     private boolean canBeTaken;
     private boolean edible;
     private float increaseCapacity;
-    
+
     /**
      * Constructor for objects of class Item
      * 
@@ -42,7 +42,6 @@ public class Item
         return "ID " + id + ": " + description + " (" + weight + " kg.); " + isEdible();
     }
 
-    
     private String isEdible(){
         String isEdibleObject = null;
 
@@ -73,7 +72,11 @@ public class Item
     {
         return weight;
     }  
-
+    
+    public boolean getEdible(){
+        return edible;
+    }
+    
     /**
      * Return if the item can be taken
      * 
