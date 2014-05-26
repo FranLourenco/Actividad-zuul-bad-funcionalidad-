@@ -21,7 +21,6 @@ public class Game
     private Parser parser;
     private Player player;
     private int siguienteIDAAsignar;
-    
 
     /**
      * Create the game and initialise its internal map.
@@ -38,55 +37,52 @@ public class Game
      */
     private void createRooms()
     {
-        Room galicia, leon, castilla, portugal, aragon, granada;
+        Room north, south, east, west, central, southeast;
 
         // create the rooms
-        galicia = new Room("el reino de Galicia");
-        leon = new Room("el reino de León");
-        castilla = new Room("el reino de Castilla");
-        aragon = new Room("el reino de Aragon");
-        granada = new Room("el reino de Granada");
-        portugal = new Room("el reino de Portugal");                          
+        north = new Room("north of the central room");
+        south = new Room("south of the central room");
+        east = new Room("east of the central room");
+        west = new Room("west of the central room");
+        central = new Room("in central room");
 
         // initialise room exits
-        galicia.setExit("east", leon);
-        galicia.setExit("south", portugal);
-        galicia.setExit("southEast", castilla);
 
-        leon.setExit("south", castilla);
-        leon.setExit("west", galicia);
+        north.setExit("bajandoLasEscaleras", central);
+        east.setExit("saltasElMuro", central);
+        east.setExit("bajasPorElCamino", south);
 
-        castilla.setExit("north", leon);
-        castilla.setExit("east", aragon);
-        castilla.setExit("south", granada);
-        castilla.setExit("west", portugal);
-        castilla.setExit("northWest", galicia);
+        south.setExit("vasAlCentro", central);
+        south.setExit("subesElCamino", east);
 
-        granada.setExit("north", castilla);
-        granada.setExit("jumpingNorthEast", aragon);
+        west.setExit("pasaPorElPuente", central);
 
-        aragon.setExit("west", castilla);
+        central.setExit("subeLasEscaleras", north);
+        central.setExit("bajasALaZonaSur", south);
+        central.setExit("esquivasElMuro", east);
+        central.setExit("saltaElRio", west);
 
-        portugal.setExit("north", galicia);
-        portugal.setExit("east", castilla);
+        //objetos en las salas
+        central.addItem(new Item("roca", 12.4,true, false, 0));
+        central.addItem(new Item("ordenador", 6.2,true, false, 0));
+        central.addItem(new Item("ventana", 8.9,false, false, 0));
+        central.addItem(new Item("galleta", 1.2, true, true, 2));
+        central.addItem(new Item("carne", 6.3, true, true, 5));
         
-        //define the items
-        galicia.addItem(new Item("Una espada gaelica", 3.5, true));
-        galicia.addItem(new Item("Un tonel de vino", 10.2, false));
+        south.addItem(new Item("mochila", 3.2,true, false, 0));
+        south.addItem(new Item("pez", 4.5, true, true, 3));
+        south.addItem(new Item("whiskyCola", 3, true, true, -10));
+
+        west.addItem(new Item("tronco", 14,false, false, 0));
+        west.addItem(new Item("extintor", 9,true, false, 0));
+        west.addItem(new Item("seta", 0.50, true, true, 1));
         
-        leon.addItem(new Item("El Santo Grial", 1.4, true));
+        east.addItem(new Item("botella", 2,true, false, 0));
+        east.addItem(new Item("armario", 36.2,false, false, 0));     
+        east.addItem(new Item("chorizoDeVillares", 20, true, true, 20));
         
-        castilla.addItem(new Item("Un cuchillo afilado", 0.5, true));
-        castilla.addItem(new Item("Un cofre de oro", 3.0, true));
-        castilla.addItem(new Item("Un baul de madera", 24.8, true));
-        
-        aragon.addItem(new Item("Una carreta", 35.5, false));
-        
-        granada.addItem(new Item("Una pocima contra el dolor de cabeza", 0.6, true));
-        
-        portugal.addItem(new Item("Una armadura", 20.2, false));        
-    
-        player.setCurrentRoom(leon);
+
+        player.setCurrentRoom(central);
     }
 
     /**
@@ -115,7 +111,7 @@ public class Game
         System.out.println();
         System.out.println("Welcome to the World of Zuul!");
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type 'help' if you need help.");
+        System.out.println("Type 'ayuda' if you need help.");
         System.out.println();
         player.printLocationInfo();
     }
@@ -134,34 +130,34 @@ public class Game
             return false;
         }
 
-        String commandWord = command.getCommandWord();
-        if (commandWord.equals("help")) {
+        Option commandWord = command.getCommandWord();
+        if (commandWord == Option.HELP) {
             printHelp();
         }
-        else if (commandWord.equals("go")) {
+        else if (commandWord == Option.GO) {
             player.goRoom(command);
         }
-        else if(commandWord.equals("look")) {
+        else if(commandWord == Option.LOOK) {
             player.look();
         }
-        else if(commandWord.equals("eat")) {
-            player.eat();
+        else if(commandWord == Option.EAT) {
+            player.eat(command);
         }
-        else if(commandWord.equals("back")) {
+        else if(commandWord == Option.BACK) {
             player.back();
         }
-        else if (commandWord.equals("items")){
+        else if (commandWord == Option.ITEMS){
             player.items();
         }
-        else if (commandWord.equals("take")){
+        else if (commandWord == Option.TAKE){
             player.take(command);
         }
-        else if (commandWord.equals("quit")) {
+        else if (commandWord == Option.QUIT) {
             wantToQuit = quit(command);
         }
-	else if (commandWord.equals("drop")){
-	    player.drop(command);
-	}
+        else if (commandWord == Option.DROP){
+            player.drop(command);
+        }
         return wantToQuit;
     }
 
@@ -178,10 +174,8 @@ public class Game
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
-        parser.showCommands();
     }
 
-    
 
     /** 
      * "Quit" was entered. Check the rest of the command to see
@@ -200,6 +194,5 @@ public class Game
     }
 
 }
-
 
 
