@@ -66,6 +66,9 @@ public class Player
             if(item.getEdible()){
                 System.out.println("you've eaten the object.");
                 currentRoom.removeItem(id);
+                System.out.println("The maximum load current is: " + cargaMaxima);
+                increaseMaximunCapacity(item);
+                System.out.println("maximum load has been updated to: " + cargaMaxima);
             }else{
                 System.out.println("The object that you've got your result in death.");
             }
@@ -74,6 +77,10 @@ public class Player
         }
     }
 
+    public void increaseMaximunCapacity(Item item){        
+        cargaMaxima += item.getIncreaseCapacity();
+    }
+    
     /**
      * Return to the previous room
      */

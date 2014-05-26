@@ -77,6 +77,10 @@ public class Item
         return edible;
     }
     
+    public double getIncreaseCapacity(){
+        return increaseCapacity;
+    }
+    
     /**
      * Return if the item can be taken
      * 
